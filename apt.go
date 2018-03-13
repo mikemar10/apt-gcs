@@ -4,9 +4,9 @@ import (
 	"bufio"
 	"bytes"
 	"crypto/md5"
-  "crypto/sha1"
+	"crypto/sha1"
 	"crypto/sha256"
-  "crypto/sha512"
+	"crypto/sha512"
 	"fmt"
 	"io"
 	"io/ioutil"
@@ -140,9 +140,9 @@ func (a *AptMethod) ReadObejct(message map[string]string) {
 		body, _ := ioutil.ReadAll(resp.Body)
 		ioutil.WriteFile(filename, body, 0644)
 		md5sum := md5.Sum(body)
-    sha1sum := sha1.Sum(body)
+		sha1sum := sha1.Sum(body)
 		sha256sum := sha256.Sum256(body)
-    sha512sum := sha512.Sum512(body)
+		sha512sum := sha512.Sum512(body)
 		a.SendUriDone(map[string]string{
 			"URI":           uri,
 			"Filename":      filename,
@@ -150,9 +150,9 @@ func (a *AptMethod) ReadObejct(message map[string]string) {
 			"Last-Modified": resp.Header.Get("last-modified"),
 			"MD5-Hash":      fmt.Sprintf("%x", md5sum),
 			"MD5Sum-Hash":   fmt.Sprintf("%x", md5sum),
-      "SHA1-Hash":     fmt.Sprintf("%x", sha1sum),
+			"SHA1-Hash":     fmt.Sprintf("%x", sha1sum),
 			"SHA256-Hash":   fmt.Sprintf("%x", sha256sum),
-      "SHA512-Hash":   fmt.Sprintf("%x", sha512sum),
+			"SHA512-Hash":   fmt.Sprintf("%x", sha512sum),
 		})
 	} else {
 		a.SendUriFailure(map[string]string{
